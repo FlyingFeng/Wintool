@@ -5,8 +5,6 @@ VisualStudioVersion = 17.6.33513.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinTool", "WinTool\WinTool.csproj", "{9CF8A9B0-FA09-4B53-8963-2575BEE0931E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console.Test", "Console.Test\Console.Test.csproj", "{08281061-0DB2-4200-B3A8-96789A30046D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,14 +21,6 @@ Global
 		{9CF8A9B0-FA09-4B53-8963-2575BEE0931E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CF8A9B0-FA09-4B53-8963-2575BEE0931E}.Release|x64.ActiveCfg = Release|x64
 		{9CF8A9B0-FA09-4B53-8963-2575BEE0931E}.Release|x64.Build.0 = Release|x64
-		{08281061-0DB2-4200-B3A8-96789A30046D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{08281061-0DB2-4200-B3A8-96789A30046D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{08281061-0DB2-4200-B3A8-96789A30046D}.Debug|x64.ActiveCfg = Debug|x64
-		{08281061-0DB2-4200-B3A8-96789A30046D}.Debug|x64.Build.0 = Debug|x64
-		{08281061-0DB2-4200-B3A8-96789A30046D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{08281061-0DB2-4200-B3A8-96789A30046D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{08281061-0DB2-4200-B3A8-96789A30046D}.Release|x64.ActiveCfg = Release|x64
-		{08281061-0DB2-4200-B3A8-96789A30046D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
