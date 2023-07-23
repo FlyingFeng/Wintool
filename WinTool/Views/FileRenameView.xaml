@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="WinTool.Views.FileRenameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WinTool.Views"
+             xmlns:vm="clr-namespace:WinTool.ViewModels"
+             xmlns:model="clr-namespace:WinTool.Models.FileRename"
+             xmlns:ext="clr-namespace:WinTool.ElementExtensions"
+             xmlns:converters="clr-namespace:WinTool.Converters"
+             mc:Ignorable="d" 
+             Padding="10"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:RenameFileViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <converters:EnumRenameState2StringConverter x:Key="EnumRenameState2StringConverter"/>
+
+        <x:Array Type="{x:Type model:RenameFileModel}" x:Key="TempData">
+            <model:RenameFileModel OriginFileName="1.txt" NewFileName="01.txt"/>
+            <model:RenameFileModel OriginFileName="2.txt" NewFileName="02.txt"/>
+        </x:Array>
+
+       
+        
+    </UserControl.Resources>
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition/>
+            <RowDefinition Height="52"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="155"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel >
+                <Button Content="打开文件" Width="110" Command="{Binding OpenFilesCommand}"/>
+                <Rectangle Height="10"/>
+                <Button Content="打开文件夹" Width="110" Command="{Binding OpenFolderCommand}"/>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="100" VerticalAlignment="Center">
+                        <Run Text="模板："/>
+                        <Run Text="(查看说明)" Foreground="Blue" MouseDown="Run_MouseDown">
+                            <Run.Style>
+                                <Style TargetType="Run">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="TextDecorations" Value="Underline"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Run.Style>
+                        </Run>
+                    </TextBlock>
+                    <TextBox Style="{StaticResource MyTextBoxStyle}" ext:TextInfo.PlaceHolder="示例：example{index}" Width="320" Height="30" VerticalAlignment="Center" Text="{Binding TemplateString}"/>
+                    <Rectangle Width="55"/>
+                    <CheckBox Content="生成新文件夹" IsChecked="{Binding CreateNewFolder}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                    <Rectangle Width='100'/>
+                    <Button Content="应用模板" Width="100" Command="{Binding ApplyTemplateCommand}"/>
+                    <Rectangle Width="10"/>
+                    <Button Content="撤销模板" Width="100" Command="{Binding UndoTemplateCommand}"/>
+                    <Rectangle Width="10"/>
+                    <Button Content="执行" Width="100" Command="{Binding RunCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+
+
+        <ListBox Grid.Row="2" ItemsSource="{Binding RenameFiles}"  d:ItemsSource="{StaticResource TempData}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="3,5"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="LightBlue"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type model:RenameFileModel}">
+                    <Grid Margin="4" HorizontalAlignment="Stretch" Height="60">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.RowSpan="2" VerticalAlignment="Center" Text="{Binding Index}"/>
+
+                        <TextBlock Text="原始文件名：" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="新文件名：" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="{Binding OriginFileName}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding NewFileName}" Padding="0" BorderThickness="0,0,0,1" Grid.Row="1" Grid.Column="2" VerticalContentAlignment="Center" Width="600"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Rectangle Width="10"/>
+            <TextBlock Text="{Binding RenameState,Converter={StaticResource EnumRenameState2StringConverter}}"
+                       VerticalAlignment="Center"
+                       Width="72"/>
+            <Border VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding CurrentCount}"/>
+                    <TextBlock Text="/"/>
+                    <TextBlock Text="{Binding Total}"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

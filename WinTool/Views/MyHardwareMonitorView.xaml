@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="WinTool.Views.MyHardwareMonitorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WinTool.Views"
+             xmlns:vm="clr-namespace:WinTool.ViewModels"
+             xmlns:myConverter="clr-namespace:WinTool.Converters"
+             xmlns:hwEnum="clr-namespace:WinTool.Models.MyHardwareMonitor"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <myConverter:HardwareNodeType2VisibilityConverter x:Key="HardwareNodeType2VisibilityConverter"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:MyHardwareInfoViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <TreeView ItemsSource="{Binding ComputerInfo}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <Rectangle Width="15"/>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding HardwareType,Converter={StaticResource HardwareNodeType2VisibilityConverter}}">
+                            <TextBlock Text="{Binding MinValue}"/>
+                            <Rectangle Width="15"/>
+                            <TextBlock Text="{Binding MaxValue}"/>
+                            <Rectangle Width="15"/>
+                            <TextBlock Text="{Binding SensorValue}"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</UserControl>

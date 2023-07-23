@@ -1,0 +1,46 @@
+﻿<Window x:Class="WinTool.RenameReadmeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinTool"
+        mc:Ignorable="d"
+        Title="说明" Height="450" Width="800">
+    <Grid>
+        <FlowDocumentScrollViewer>
+            <FlowDocument>
+                <Paragraph TextAlignment="Center" FontWeight="Bold" FontSize="22">模板说明</Paragraph>
+                <Section>
+                    <Paragraph>使用示例，假如原始文件名称是document.txt</Paragraph>
+                    <Paragraph>可选模板占位符包括：{index}按序号生成，{yyyy}4位当前年，{mm}2位当前月，{dd}2位当前日；如果不包含{index}，后面会默认从1开始排序</Paragraph>
+                    <List>
+                        <ListItem>
+                            <Paragraph>document{index}==>document0001.txt，document0002.txt ......</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>example{index:3}==>example001.txt，example002.txt ......</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>document{index:4:10}==>document0010.txt，document0011.txt</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>test==>test1.txt，test2.txt</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>document{yyyy}==>document20231.txt，document20232.txt（假如当前是2023年）</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>document{mm}==>document051.txt，document052.txt（假如当前是5月）</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>document{dd}==>document011.txt，document012.txt（假如当前是1日）</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>document{index}_{yyyy}_{mm}==>document0001_2023_05.txt，document0002_2023_05.txt</Paragraph>
+                        </ListItem>
+                    </List>
+                </Section>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Grid>
+</Window>
